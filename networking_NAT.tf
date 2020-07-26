@@ -84,21 +84,6 @@ resource "aws_route_table_association" "route_table_2_associate" {
     route_table_id = "${aws_route_table.route_table_2.id}"
 }
 
-variable "key_name" { default = "key2" }
-
-resource "tls_private_key" "example" {
-  algorithm = "RSA"
-  rsa_bits  = 4096
-}
-
-resource "aws_key_pair" "generated_key" {
-  depends_on = [
-    tls_private_key.example
-  ]
-  key_name   = "${var.key_name}"
-  public_key = "${tls_private_key.example.public_key_openssh}"
-}
-
 resource "aws_security_group" "wordpress_sg" {
   name        = "wordpress_sg"
   description = "Allow TLS inbound traffic"
