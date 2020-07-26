@@ -132,17 +132,6 @@ resource "aws_security_group_rule" "mysql_sg_rule_eg" {
   security_group_id = "${aws_security_group.MySQL_sg.id}"
 }
 
-/*data "aws_ami" "sql" {
-  executable_users = ["self"]
-  most_recent      = true
-  owners           = ["aws-marketplace"]
-
-  filter {
-    name   = "name"
-    values = ["WordPress Certified by Bitnami and Automattic"]
-  }
-}*/
-
 resource "aws_instance" "mysql_instance" {
   ami             = "ami-0428a02584750600f"
   instance_type   = "t2.micro"
@@ -155,17 +144,6 @@ resource "aws_instance" "mysql_instance" {
   }
 }
 
-/*data "aws_ami" "wrdprss" {
-  executable_users = ["self"]
-  most_recent      = true
-  owners           = ["aws-marketplace"]
-
-  filter {
-    name   = "name"
-    values = ["WordPress Certified by Bitnami and Automattic"]
-  }
-}*/
-
 resource "aws_instance" "wordpress_instance" {
   ami             = "ami-004a955bfb611bf13"
   instance_type   = "t2.micro"
@@ -177,8 +155,6 @@ resource "aws_instance" "wordpress_instance" {
     Name = "wordpress_instance"
   }
 }
-
-
 
 output "public_subnet" {
   value = "${aws_subnet.public_subnet}"
